@@ -7,19 +7,30 @@ import Card from './Card';
 const MoviesList = () => {
     const [searchInput, SetSearchInput] = useState("");
     const [MovieList, SetMovieList] = useState([]);
+    const [filteredList, SetFilteredList] = useState([]);
     useEffect(() => {
         axios.get('https://api.themoviedb.org/3/movie/550?api_key=c1c3795c8fb649da8436ab9b25950b14')
             .then(response => {
                 let list = [response.data];
                 console.log(list)
                 SetMovieList(list);
+                SetFilteredList(list);
             })
             .catch(error => {
                 console.log(error)
-            })
-    }, [])
+            });
+    }, []);
+
+    useEffect(() => {
+        const tempList = filteredList.filter(list =>
+            list.title.toLowerCase().includes(searchInput.toLowerCase())
+        );
+        console.log(tempList, "dfgdfg")
+        SetMovieList(tempList);
+    }, [searchInput]);
+
     const handleChange = (e) => {
-        SetSearchInput(e.target.value)
+        SetSearchInput(e.target.value);
     }
     return (
         <div className="container py-4">
