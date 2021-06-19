@@ -5,19 +5,15 @@ const MovieDetails = (props) => {
   let posterUrl = 'https://image.tmdb.org/t/p/original';
   const data = props.location.state.detail;
   const dateFormat = (date) => {
-    // var dateFormat = require('dateformat');
     var year = date.slice(0, 4)
     return year;
-    // dateFormat(now, "dddd, mmmm dS, yyyy, h:MM:ss TT");
   }
 
   const timeFormat = (time) => {
     const min = time % 60;
-
     const hour = (time-min)/60;
-    
     var HHMM = hour.toString() + ":" + (min<10?"0":"") + min.toString();
-    return HHMM
+    return HHMM;
   }
   return (
     <div className="container py-4">
