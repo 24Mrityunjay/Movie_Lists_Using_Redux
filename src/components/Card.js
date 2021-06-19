@@ -16,9 +16,9 @@ const Card = ({ movieObj, index }) => {
                 <img src={`${posterUrl + movieObj.poster_path}`} alt="logo" style={{ "borderRadius": "10px 10px 0px 0px", "height": "70%" }} />
                 <div className="movieName">
                     <span className="card-header">{movieObj.title}</span>
-                    <span className="ratings">{`Rating ${movieObj.vote_average}`}</span>
+                    <span className="ratings">{`Rating: ${movieObj.vote_average}`}</span>
                 </div>
-                <span className="desc">{`Description ${movieObj.overview}`}</span>
+                <span className="desc">{`Description: ${movieObj.overview}`}</span>
             </div>
         </div>
     );
