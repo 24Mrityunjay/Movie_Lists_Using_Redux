@@ -1,11 +1,21 @@
-export const ADD_TODO = 'ADD_TODO';
+import * as type from '../constants';
 
-export function addToDo(title) {
+export const getMovieList = () => {
   return {
-    type: ADD_TODO,
-    toDoItem: {
-      _id: (new Date().getTime()),
-      title
-    }
-  };
+    type: type.GET_MOVIE_LIST
+  }
+}
+
+export const getMovieListSuccess = (listData) => {
+  return {
+    type: type.GET_MOVIE_LIST_SUCCESS,
+    listData: listData
+  }
+}
+
+export const getMovieListFailed = (message) => {
+  return {
+    type: type.GET_MOVIE_LIST_FAILED,
+    error: message
+  }
 }

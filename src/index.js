@@ -1,15 +1,17 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import toDoApp from './reducers';
+import store from './store';
+// import store from './ReactRedux/store';
 import App from './App';
 
-const store = createStore(toDoApp);
+console.log("index.js Sir");
 
 render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
+  <React.StrictMode>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </React.StrictMode>,
   document.getElementById('root')
 );

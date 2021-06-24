@@ -1,24 +1,8 @@
+import storeMovieList from './movieList'
+import { combineReducers } from 'redux';
 
-import { ADD_TODO } from '../actions';
+const rootReducer = combineReducers({
+  storeMovieList
+})
 
-const initialState = {
-  toDoList: []
-};
-
-export default function toDoApp(state = initialState, action) {
-  switch (action.type) {
-    case ADD_TODO:
-      let newToDoList = [
-        ...state.toDoList,
-        {
-          ...action.toDoItem
-        }
-      ];
-      return {
-        ...state,
-        toDoList: newToDoList
-      };
-    default:
-      return state;
-  }
-}
+export default rootReducer;

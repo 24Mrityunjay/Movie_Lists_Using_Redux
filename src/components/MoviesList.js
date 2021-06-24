@@ -3,34 +3,32 @@ import '../App.css';
 import MaterialIcon from 'material-icons-react';
 import axios from 'axios';
 import Card from './Card';
+import { useSelector, useDispatch } from 'react-redux';
+import { getMovieList } from '../actions/index';
 
 const MoviesList = () => {
+    let myState = useSelector((state)=>state.storeMovieList);
+    console.log(myState,"myState")
+    const dispatch = useDispatch();
     const [searchInput, SetSearchInput] = useState("");
     const [MovieList, SetMovieList] = useState([]);
     const [filteredList, SetFilteredList] = useState([]);
+
     useEffect(() => {
-        axios.get('https://api.themoviedb.org/3/movie/550?api_key=c1c3795c8fb649da8436ab9b25950b14')
-            .then(response => {
-                let list = [response.data];
-                console.log(list)
-                SetMovieList(list);
-                SetFilteredList(list);
-            })
-            .catch(error => {
-                console.log(error)
-            });
+        dispatch(getMovieList());
     }, []);
 
     useEffect(() => {
-        const tempList = filteredList.filter(list =>
-            list.title.toLowerCase().includes(searchInput.toLowerCase())
-        );
-        console.log(tempList, "dfgdfg")
-        SetMovieList(tempList);
-    }, [searchInput]);
+            SetMovieList(myState.listData)
+            SetFilteredList(myState.listData)
+    },[]);
 
     const handleChange = (e) => {
-        SetSearchInput(e.target.value);
+        SetSearchInput(e.target.state);
+        const tempList = filteredList && filteredList.filter(list =>
+            list.title.toLowerCase().includes(e.target.value.toLowerCase())
+        );
+        SetMovieList(tempList);
     }
     return (
         <div className="container py-4">
@@ -56,6 +54,8 @@ const MoviesList = () => {
                         return <Card movieObj={data} index={index} />;
                     })
                 }
+                {MovieList.length === 0 && <p>No Movie available!</p>}
+                {myState.error && !myState.loading && <p>{myState.error}</p>}
             </div>
         </div>
     )
