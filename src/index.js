@@ -5,7 +5,6 @@ import store from './store';
 // import store from './ReactRedux/store';
 import App from './App';
 
-console.log("index.js Sir");
 
 render(
   <React.StrictMode>
