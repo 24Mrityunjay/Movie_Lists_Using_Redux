@@ -6,7 +6,6 @@ const initialState = {
   error: ""
 };
 const storeMovieList = (state = initialState, action) => {
-    console.log(action.listData,"list reducer")
   switch(action.type) {
     case type.GET_MOVIE_LIST : {
       return{

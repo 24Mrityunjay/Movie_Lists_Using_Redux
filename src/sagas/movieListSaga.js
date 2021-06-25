@@ -1,5 +1,5 @@
 import { call, put, takeEvery } from "@redux-saga/core/effects";
-import * as type from '../constants';
+
 
 function getApiData() {
     const apiURL = 'https://api.themoviedb.org/3/movie/popular?api_key=c1c3795c8fb649da8436ab9b25950b14&page=1';

@@ -17,8 +17,8 @@ const MovieDetails = (props) => {
   }
   return (
     <div className="container py-4">
-      {/* <div className="header">
-        <div class="form-group has-search mb-2 ">
+      <div className="header">
+        <div className="form-group has-search mb-2 ">
           <span className={"details"}>Movie Details</span>
         </div>
       </div>
@@ -32,7 +32,7 @@ const MovieDetails = (props) => {
           <p className="">{` ${dateFormat(data.release_date)} | ${timeFormat(data.runtime)}`}</p>
           <span className="">{`Description: ${data.overview}`}</span>
         </div>
-      </div> */}
+      </div>
     </div>
   )
 }

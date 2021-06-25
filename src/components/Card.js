@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from "react-router-dom";
-const Card = ({ movieObj, index }) => {
+const Card = ({ movieObj }) => {
     let history = useHistory();
     let posterUrl = 'https://image.tmdb.org/t/p/original';
     const handleClick = (e) => {

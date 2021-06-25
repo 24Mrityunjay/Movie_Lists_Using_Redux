@@ -1,27 +1,31 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import '../App.css';
 import MaterialIcon from 'material-icons-react';
-import axios from 'axios';
 import Card from './Card';
 import { useSelector, useDispatch } from 'react-redux';
 import { getMovieList } from '../actions/index';
 
 const MoviesList = () => {
-    let myState = useSelector((state)=>state.storeMovieList);
-    console.log(myState,"myState")
+    let myState = useSelector((state) => state.storeMovieList);
     const dispatch = useDispatch();
     const [searchInput, SetSearchInput] = useState("");
     const [MovieList, SetMovieList] = useState([]);
     const [filteredList, SetFilteredList] = useState([]);
 
-    useEffect(() => {
+    const initFetch = useCallback(() => {
         dispatch(getMovieList());
-    }, []);
+    }, [dispatch]);
 
     useEffect(() => {
-            SetMovieList(myState.listData)
-            SetFilteredList(myState.listData)
-    },[]);
+        initFetch();
+    }, [initFetch]);
+
+    useEffect(() => {
+        if(myState && myState.listData){
+        SetMovieList(myState.listData)
+        SetFilteredList(myState.listData)
+    }
+    }, [myState.listData]);
 
     const handleChange = (e) => {
         SetSearchInput(e.target.state);
@@ -33,8 +37,8 @@ const MoviesList = () => {
     return (
         <div className="container py-4">
             <div className="header">
-                <div class="form-group has-search mb-2 ">
-                    <div class="form-control-feedback">
+                <div className="form-group has-search mb-2 ">
+                    <div className="form-control-feedback">
                         <MaterialIcon icon="search" />
                     </div>
                     <input
@@ -51,7 +55,7 @@ const MoviesList = () => {
             <div className="content">
                 {
                     MovieList && MovieList.map((data, index) => {
-                        return <Card movieObj={data} index={index} />;
+                        return <Card movieObj={data} key={index} />;
                     })
                 }
                 {MovieList.length === 0 && <p>No Movie available!</p>}
