@@ -2,10 +2,10 @@ import React, { useEffect, useState, useCallback } from 'react'
 import '../App.css';
 import MaterialIcon from 'material-icons-react';
 import Card from './Card';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch, connect } from 'react-redux';
 import { getMovieList } from '../actions/index';
 
-const MoviesList = () => {
+const MoviesList = (props) => {
     let myState = useSelector((state) => state.storeMovieList);
     const dispatch = useDispatch();
     const [searchInput, SetSearchInput] = useState("");
@@ -20,11 +20,19 @@ const MoviesList = () => {
         initFetch();
     }, [initFetch]);
 
+    // useEffect(() => {
+        
+    //     SetMovieList(props.storeMovieList.listData)
+    //     SetFilteredList(props.storeMovieList.listData)
+    
+    // }, [props.storeMovieList.listData]);
+
+    
     useEffect(() => {
-        if(myState && myState.listData){
+        
         SetMovieList(myState.listData)
         SetFilteredList(myState.listData)
-    }
+    
     }, [myState.listData]);
 
     const handleChange = (e) => {
@@ -59,10 +67,19 @@ const MoviesList = () => {
                     })
                 }
                 {MovieList.length === 0 && <p>No Movie available!</p>}
-                {myState.error && !myState.loading && <p>{myState.error}</p>}
+                {/* {myState.error && !myState.loading && <p>{myState.error}</p>} */}
             </div>
         </div>
     )
 }
+// const mapStateToProps = state => ({
+//     ...state
+// })
+
+// const mapDispatchToProps = dispatch => ({
+//     simpleAction: () => dispatch(getMovieList())
+// })
+
+// export default connect(mapStateToProps, mapDispatchToProps)(MoviesList);
 
 export default MoviesList;
